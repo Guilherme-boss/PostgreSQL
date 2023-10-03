@@ -17,3 +17,14 @@ select aluno.primeiro_nome,
 	   
 	   select curso.nome from curso where categoria_id in (
 	   select id from categoria where nome not like '% %');
+
+CRIANDO FUNÇÕES EM SQL 
+
+create function primeira_funcao() returns integer as '
+select (5-3)*2
+
+'language sql;
+
+create function soma_dois_numeros(integer,integer) returns integer as '
+select $1 + $2;
+'language sql;
