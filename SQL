@@ -28,3 +28,28 @@ select (5-3)*2
 create function soma_dois_numeros(integer,integer) returns integer as '
 select $1 + $2;
 'language sql;
+
+
+
+create table instrutor(
+	id serial primary key,
+	nome varchar(255) not null,
+	salario decimal(10,2)
+
+);
+
+insert into instrutor (nome,salario) values ('Vinicius Dias', 100);
+insert into instrutor (nome,salario) values ('Guilherme Dias', 200);
+insert into instrutor (nome,salario) values ('Felipe Dias', 300);
+insert into instrutor (nome,salario) values ('Alura Dias', 500);
+insert into instrutor (nome,salario) values ('Flavio Dias', 700);
+
+create function dobro_do_salario(instrutor) returns decimal as $$ 
+	select $1.salario * 2 as dobro;
+$$ language sql;
+
+create function instrutores_bem_pago(valor_salario decimal) returns setof instrutor as $$ 
+select * from instrutor where salario > valor_salario;
+$$ language sql;
+
+select* from instrutores_bem_pago(200);
